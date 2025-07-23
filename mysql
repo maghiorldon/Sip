@@ -1,0 +1,21 @@
+CREATE TABLE subscriber (
+  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  username VARCHAR(64) NOT NULL,
+  domain VARCHAR(64) NOT NULL,
+  password VARCHAR(64) NOT NULL,
+  ha1 VARCHAR(128) NOT NULL,
+  ha1b VARCHAR(128) DEFAULT NULL,
+  email VARCHAR(128) DEFAULT NULL,
+  fullname VARCHAR(128) DEFAULT NULL,
+  created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  modified TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  UNIQUE KEY (username, domain)
+);
+
+
+-----------_---------
+
+
+INSERT INTO subscriber (username, domain, password, ha1) VALUES
+('1001', 'your.domain.com', 'pass1001', MD5(CONCAT('1001', ':', 'your.domain.com', ':', 'pass1001'))),
+('1002', 'your.domain.com', 'pass1002', MD5(CONCAT('1002', ':', 'your.domain.com', ':', 'pass1002')));
