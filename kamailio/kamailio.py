@@ -21,6 +21,15 @@ def mod_init():
 
 class kamailio:
 
+    def __init__(self):
+        KSR.info('===== kamailio.__init__\n')
+
+
+    # executed when kamailio child processes are initialized
+    def child_init(self, rank):
+        KSR.info('===== kamailio.child_init(%d)\n' % rank)
+        return 0
+
     def ksr_startup(self):
         KSR.log("INFO", "Python KEMI startup completed.\n")
         return 0
