@@ -73,13 +73,23 @@ class kamailio:
                 return -1
 
             return KSR.tm.t_relay()
-
+            
         elif method == "REGISTER":
             if not KSR.is_REGISTER():
                 return 1
+
+    # MySQL 帳密驗證
+            if KSR.auth_db.auth_check("location", "subscriber", 0) < 0:
+                KSR.auth.auth_challenge("location", 0)
+                return -1
+
+    # 通過驗證後，儲存 location
             if KSR.registrar.save("location", 0) < 0:
                 KSR.sl.sl_reply_error()
-            return -255
+                return -1
+
+            return -255  # -255 代表處理結束，不再繼續跑 cfg
+        
 
         return 1  # 所有未處理的方法預設 return
 
