@@ -1,6 +1,23 @@
-import KSR
-import random
 import sys
+import KSR as KSR
+import random
+
+# global variables corresponding to defined values (e.g., flags) in kamailio.cfg
+FLT_ACC=1
+FLT_ACCMISSED=2
+FLT_ACCFAILED=3
+FLT_NATS=5
+
+FLB_NATB=6
+FLB_NATSIPPING=7
+
+
+# global function to instantiate a kamailio class object
+# -- executed when kamailio app_python module is initialized
+def mod_init():
+    KSR.info("===== from Python mod init\n")
+    # dumpObj(KSR)
+    return kamailio()
 
 class kamailio:
 
